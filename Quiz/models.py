@@ -7,14 +7,14 @@ class Quiz(models.Model):
     quiz_id = models.IntegerField()
     quiz_headline = models.CharField(max_length=100, null=True, blank=True)
     quiz_grade = models.CharField(max_length=50)
-    quiz_questions = models.ManyToManyField(Question)
+    quiz_questions = models.ManyToManyField(Question,related_name='quiz_questions')
     quiz_author = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     quiz_creation_time = models.DateTimeField(auto_now_add=True)
     quiz_launch_time = models.DateTimeField(null=True)
     quiz_real_time = models.IntegerField(null=True, blank=True)
     quiz_setion_time = models.IntegerField(null=True, blank=True)
     quiz_is_launched = models.BooleanField(default=False)
-    quiz_class_room = models.ManyToManyField(ClassRoom)
+    quiz_class_room = models.ManyToManyField(ClassRoom , related_name='quiz_class')
     quiz_subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
     def set_quiz_id(self, quiz_id):
@@ -50,12 +50,13 @@ class Answers(models.Model):
     answers_points = models.IntegerField()
     answer = models.CharField(max_length=100, blank=True, null=True)
     time_to_answer = models.IntegerField()
-    answers_quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    answers_quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE,related_name='quiz_answers')
     answers_questions = models.ManyToManyField(Question)
     answer_class_room = models.ManyToManyField(ClassRoom)
     answer_grade = models.CharField(max_length=10, null=True, blank=True)
     answer_subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-
+    answer_creation_time = models.DateTimeField(auto_now_add=True)
+    
     def set_amswers_author(self, amswers_author):
         self.amswers_author = amswers_author
 

@@ -9,7 +9,18 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'username',  'role',  'password']
+    def save(self):
+        # user = User(
+        #     email = self.validated_data['email'],
+        #     username = self.validated_data['username'],
+        #     role = self.validated_data['role'],
         
+        # )
+        # password = self.validated_data['password']
+        # user.set_password(password)
+        # user.save()
+        user = User.objects.create_user(**self.validated_data)
+        return user
 
 class TeacherSerializer(WritableNestedModelSerializer):
     user = UserSerializer()

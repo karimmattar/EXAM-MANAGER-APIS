@@ -62,7 +62,7 @@ class TR(models.Model):
 class Rate(models.Model):
     stars =  models.CharField(max_length=10 , null=False , blank=False )
     comment = models.CharField(max_length=250 , null=True , blank= True)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE,related_name='reviews')
     author = models.ForeignKey(Teacher ,on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     creation_time = models.DateTimeField(auto_now_add=True)

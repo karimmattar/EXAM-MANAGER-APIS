@@ -99,7 +99,7 @@ class Student(models.Model):
     grade = models.CharField(max_length=10, null=False, blank=False)
     level = models.CharField(max_length=10, null=False, blank=False)
     subjects = models.ManyToManyField(Subject, blank = True)
-    class_room = models.ForeignKey(ClassRoom, on_delete=models.CASCADE,blank = True , null=True)
+    class_room = models.ForeignKey(ClassRoom, on_delete=models.CASCADE,blank = True , null=True , related_name='student_class')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # parent = models.ForeignKey(Parent, on_delete=models.CASCADE)
     # Father_Info_First_Name = models.CharField(max_length=50, null=True, blank=True)
